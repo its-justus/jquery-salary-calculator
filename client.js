@@ -1,5 +1,6 @@
 // field definition. iName represents the fields name as used in code.
 // exName is the value presented on the DOM
+// this array also defines the order in which data is displayed in the table
 const employeeFields = [
     {iName: 'firstName', exName: 'First Name'},
     {iName: 'lastName', exName: 'Last Name'},
@@ -23,7 +24,8 @@ function onReady(){
 function addEmployee(event){
     console.log('adding employee');
     //get form
-    let formInputEls = $('#formEmployeeInput').children('input');
+    let form = $('#formEmployeeInput')
+    let formInputEls = form.children('input');
     console.log(formInputEls);
 
     // make a new employee from the form data
@@ -38,7 +40,14 @@ function addEmployee(event){
     employees.push(newEmployee);
 
     // render the new employee to the DOM
-    
+    let tBody = $('#tBodyEmployees');
+    // id is important here for ease of removing rows later
+    let tRow = $(`<tr id="${newEmployee.idNumber}"></tr>`);
+    tBody.append(tRow);
+    for(let field of employeeFields){
+        tRow.append(`<td class="${field.iName}">${newEmployee[field.iName]}</td>`);
+        console.log(newEmployee[field.iName]);
+    }
 }
 
 function buildForm(){
@@ -86,7 +95,7 @@ function buildTable(){
     table.append(tHead);
 
     //generate table body and add it to the table el
-    let tBody = $('<tbody></tbody>');
+    let tBody = $('<tbody id="tBodyEmployees"></tbody>');
     table.append(tBody);
 }
 
