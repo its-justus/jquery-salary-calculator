@@ -3,9 +3,14 @@ body {
 }
 
 form {
-    
+
 }
 
 table {
     
+}
+
+.summary {
+    display: inline;
+    margin: 5px;
 }

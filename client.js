@@ -8,6 +8,7 @@ const employeeFields = [
     {iName: 'annualSalary', exName: 'Annual Salary'} 
 ];
 const body = $('body'); // shorthand definition of body
+const monthlyBudget = 20000;
 
 function onReady(){
     //build form
@@ -15,7 +16,7 @@ function onReady(){
     //build display table
     buildTable();
     //build monthly total
-    buildMonthlyTotal();
+    buildSummary();
 }
 
 function addEmployee(event){
@@ -71,9 +72,15 @@ function buildTable(){
     table.append(tBody);
 }
 
-function buildMonthlyTotal(){
+function buildSummary(){
     console.log('building monthly total');
-    
+    // create summary div
+    let sDiv = $('<div class="container" id="divSummary"></div>');
+    body.append(sDiv);
+
+    sDiv.append(`<h2>Summary</h2>`)
+    sDiv.append(`<h3 class="summary">Total Monthly Budget:</h3><h3 class="summary" id="monthlyBudget">$${monthlyBudget}</h3><br>`);
+    sDiv.append(`<h3 class="summary">Monthly Salary Cost:</h3><h3 class="summary" id="monthlySalaryCost">$0</h3>`)
 }
 
 

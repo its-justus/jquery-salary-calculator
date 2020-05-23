@@ -36,7 +36,7 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
 * Tbody
     * displays rows of employee data
     * each row has delete button
-* Tfoot
+* Summary
     * has total monthly salary cost
     * monthly salary turns red if over $20,000
 
