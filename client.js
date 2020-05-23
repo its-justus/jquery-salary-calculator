@@ -9,6 +9,7 @@ const employeeFields = [
 ];
 const body = $('body'); // shorthand definition of body
 const monthlyBudget = 20000;
+const employees = [];
 
 function onReady(){
     //build form
@@ -21,6 +22,23 @@ function onReady(){
 
 function addEmployee(event){
     console.log('adding employee');
+    //get form
+    let formInputEls = $('#formEmployeeInput').children('input');
+    console.log(formInputEls);
+
+    // make a new employee from the form data
+    let newEmployee = {}; // create new empty employee object
+    for(let field of formInputEls){
+        field = $(field); // make field into a jQuery object
+        //set the current field in the newEmployee object to the field value
+        newEmployee[field.attr('id')] = field.val();
+    }
+
+    // push new employee to employees array
+    employees.push(newEmployee);
+
+    // render the new employee to the DOM
+    
 }
 
 function buildForm(){
