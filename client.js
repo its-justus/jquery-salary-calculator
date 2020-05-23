@@ -24,16 +24,20 @@ function addEmployee(event){
 
 function buildForm(){
     console.log('building form');
+    // create form div
+    let fDiv = $('<div class="container" id="divForm"></div>');
+    body.append(fDiv);
+
     // create the form element
     let form = $('<form id="formEmployeeInput"></form>');
     // add it to the body
-    body.append(form);
+    fDiv.append(form);
 
     // generate fields within the form
     form.append('<h2>Add an Employee</h2>');
     for(let field of employeeFields){
         form.append(`<label for="${field.iName}">${field.exName}:</label>`)
-        form.append(`<input type="text" id="${field.iName}" name="${field.iName}"/>`)
+        form.append(`<input type="text" id="${field.iName}" name="${field.iName}"/><br>`)
     }// end for
     form.append(`<button type="button" id="buttonAddEmployee">Submit</button>`);
     
@@ -43,13 +47,17 @@ function buildForm(){
 
 function buildTable(){
     console.log('building table');
+    // create table div
+    let tDiv = $('<div class="container" id="divTable"></div>');
+    body.append(tDiv);
+
     // create table element
     let table = $('<table id="tableEmployeeData"></table>');
     // add it to the body
-    body.append(`<h2>Employees</h2>`);
-    body.append(table);
+    tDiv.append(`<h2>Employees</h2>`);
+    tDiv.append(table);
     
-    // generate table header
+    // generate table header and add it to table el
     let tHead = $('<thead></thead>');
     let tHeadRow = $('<tr></tr>');
     for(let field of employeeFields){
@@ -58,8 +66,9 @@ function buildTable(){
     tHead.append(tHeadRow);
     table.append(tHead);
 
-    //generate table body
-    
+    //generate table body and add it to the table el
+    let tBody = $('<tbody></tbody>');
+    table.append(tBody);
 }
 
 function buildMonthlyTotal(){
