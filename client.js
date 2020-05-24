@@ -10,7 +10,7 @@ const employeeFields = [
 ];
 const body = $('body'); // shorthand definition of body
 const monthlyBudget = 20000;
-const employees = [];
+let employees = [];
 
 function onReady(){
     //build form
@@ -21,7 +21,7 @@ function onReady(){
     buildSummary();
 }
 
-function addEmployee(event){
+function addEmployee(){
     console.log('adding employee');
     //get form
     let form = $('#formEmployeeInput')
@@ -48,6 +48,30 @@ function addEmployee(event){
         tRow.append(`<td class="${field.iName}">${newEmployee[field.iName]}</td>`);
         console.log(newEmployee[field.iName]);
     }
+    
+    // add delete button to table for row
+    // data-rowID is used by the button click callback to delete the row
+    let delButton = $(`<button type="button" data-empID="${newEmployee.idNumber}">X</button>`)
+    tRow.append(delButton);
+
+    // set delButton callback function
+    delButton.on('click', function(event){
+        let button = $(event.target);
+        //get the employee ID from the delete button data-empID attribute
+        let employeeID = button.attr('data-empID');
+        // remove the row with the matching id. if this isn't working make sure the tr
+        // id attribute is being set to the employee id during rendering.
+        $(`#${employeeID}`).remove();
+
+        //remove employee from employees
+        employees = employees.filter(function(employee){
+            return employee.idNumber !== employeeID;
+        })
+
+        //update monthly costs
+        updateMonthlyCost();
+        return null;
+    })
 
     // clear input fields
     $('form input').val('');
