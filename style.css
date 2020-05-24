@@ -7,12 +7,36 @@ form {
 }
 
 table {
-    
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    align-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+}
+
+thead {
+    text-align: center;
+    background-color: #b0b0b0;
+}
+
+tr:nth-child(even) {
+    background-color: #d0d0d0;
+}
+
+#divTable {
+    text-align: center;
+}
+
+#divSummary {
+    text-align: right;
 }
 
 .summary {
     display: inline;
     margin: 5px;
+    text-align: right;
 }
 
 .overBudget {

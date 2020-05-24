@@ -10,7 +10,7 @@ const employeeFields = [
 ];
 const body = $('body'); // shorthand definition of body
 const monthlyBudget = 20000;
-let employees = [];
+let employees = []; // must be variable due to using .filter to remove employees
 
 function onReady(){
     //build form
@@ -26,12 +26,17 @@ function addEmployee(){
     //get form
     let form = $('#formEmployeeInput')
     let formInputEls = form.children('input');
-    console.log(formInputEls);
 
     // make a new employee from the form data
     let newEmployee = {}; // create new empty employee object
+    let errMessage = '';
     for(let field of formInputEls){
         field = $(field); // make field into a jQuery object
+        //validity check, exit addEmployee if input is missing
+        if(field.val() === undefined || field.val() === ""){
+            alert('Invalid input. All fields must have a value entered.');
+            return null;
+        }
         //set the current field in the newEmployee object to the field value
         newEmployee[field.attr('id')] = field.val();
     }
@@ -51,7 +56,7 @@ function addEmployee(){
     
     // add delete button to table for row
     // data-rowID is used by the button click callback to delete the row
-    let delButton = $(`<button type="button" data-empID="${newEmployee.idNumber}">X</button>`)
+    let delButton = $(`<button type="button" title="Delete Employee" data-empID="${newEmployee.idNumber}">X</button>`)
     tRow.append(delButton);
 
     // set delButton callback function
