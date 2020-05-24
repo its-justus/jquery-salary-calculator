@@ -1,6 +1,7 @@
 // field definition. iName represents the fields name as used in code.
 // exName is the value presented on the DOM
 // this array also defines the order in which data is displayed in the table
+// do not change iNames without checking though code, as some iNames are expected
 const employeeFields = [
     {iName: 'firstName', exName: 'First Name'},
     {iName: 'lastName', exName: 'Last Name'},
@@ -9,18 +10,24 @@ const employeeFields = [
     {iName: 'annualSalary', exName: 'Annual Salary'} 
 ];
 const body = $('body'); // shorthand definition of body
-const monthlyBudget = 20000;
-let employees = []; // must be variable due to using .filter to remove employees
+const monthlyBudget = 20000; //the monthly budget for salaries. 
+let employees = []; // employee array. must remain variable
 
+/*
+onReady handles building out the DOM
+*/
 function onReady(){
-    //build form
+    let buildStart = Date.now();
     buildForm();
-    //build display table
     buildTable();
-    //build monthly total
     buildSummary();
+    console.log(`Page building complete. Build time: ${Date.now() - buildStart}ms`);
 }
 
+/*
+addEmployee handles adding a new employee to the employees array and displaying
+the employee to the DOM. 
+*/
 function addEmployee(){
     console.log('adding employee');
     //get form
@@ -29,9 +36,10 @@ function addEmployee(){
 
     // make a new employee from the form data
     let newEmployee = {}; // create new empty employee object
-    let errMessage = '';
+    // loop through each input element
     for(let field of formInputEls){
         field = $(field); // make field into a jQuery object
+
         //validity check, exit addEmployee if input is missing
         if(field.val() === undefined || field.val() === ""){
             alert('Invalid input. All fields must have a value entered.');
@@ -43,12 +51,13 @@ function addEmployee(){
                     return null;
                 }
             }
-        } else if(field.attr('id') === 'annualSalary'){
+        } else if(field.attr('id') === 'annualSalary'){ //checking if salary is NaN
             if(isNaN(Number(field.val()))){
                 alert('Invalid input. Salary must be a number.')
                 return null;
             }
         }
+
         //set the current field in the newEmployee object to the field value
         newEmployee[field.attr('id')] = field.val();
     }
@@ -67,7 +76,7 @@ function addEmployee(){
     }
     
     // add delete button to table for row
-    // data-rowID is used by the button click callback to delete the row
+    // data-empID is used by the button click callback to delete the row
     let delButton = $(`<button type="button" title="Delete Employee" data-empID="${newEmployee.idNumber}">X</button>`)
     tRow.append(delButton);
 
@@ -88,7 +97,7 @@ function addEmployee(){
         //update monthly costs
         updateMonthlyCost();
         return null;
-    })
+    }) // ********* end delButton on click callback *******************
 
     // clear input fields
     $('form input').val('');
@@ -97,6 +106,10 @@ function addEmployee(){
     updateMonthlyCost();
 }
 
+
+/*
+buildForm builds out the form HTML using the employeeFields array
+*/
 function buildForm(){
     console.log('building form');
     // create form div
@@ -120,6 +133,10 @@ function buildForm(){
     form.children('button').on('click', addEmployee);
 }
 
+
+/*
+buildTable handles generating the table HTML using the employeeFields array
+*/
 function buildTable(){
     console.log('building table');
     // create table div
@@ -137,7 +154,7 @@ function buildTable(){
     let tHeadRow = $('<tr></tr>');
     for(let field of employeeFields){
         tHeadRow.append(`<th id="${field.iName}">${field.exName}</th>`);
-    }
+    }// end for
     tHead.append(tHeadRow);
     table.append(tHead);
 
@@ -146,6 +163,10 @@ function buildTable(){
     table.append(tBody);
 }
 
+
+/*
+buildSummary handles building the summary HTML
+*/
 function buildSummary(){
     console.log('building monthly total');
     // create summary div
@@ -157,6 +178,11 @@ function buildSummary(){
     sDiv.append(`<h4 class="summary">Monthly Salary Cost:</h4><h4 class="summary" id="monthlySalaryCost">$0</h4>`)
 }
 
+
+/*
+updateMonthlyCost recalculates the total monthly cost value and updates the value 
+element's class if it is over the monthlyBudget value
+*/
 function updateMonthlyCost(){
     // sum monthly salaries
     let salarySum = 0;
