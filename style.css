@@ -14,3 +14,7 @@ table {
     display: inline;
     margin: 5px;
 }
+
+.overBudget {
+    background-color: red;
+}

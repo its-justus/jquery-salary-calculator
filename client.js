@@ -48,6 +48,12 @@ function addEmployee(event){
         tRow.append(`<td class="${field.iName}">${newEmployee[field.iName]}</td>`);
         console.log(newEmployee[field.iName]);
     }
+
+    // clear input fields
+    $('form input').val('');
+
+    // calculate & display monthly salary cost
+    updateMonthlyCost();
 }
 
 function buildForm(){
@@ -110,5 +116,25 @@ function buildSummary(){
     sDiv.append(`<h3 class="summary">Monthly Salary Cost:</h3><h3 class="summary" id="monthlySalaryCost">$0</h3>`)
 }
 
+function updateMonthlyCost(){
+    // sum monthly salaries
+    let salarySum = 0;
+    console.log(employees);
+    for(let employee of employees){
+        salarySum += Number(employee.annualSalary);
+    }
+    let monthlyCost = (salarySum / 12).toFixed(2);
+
+    //display on DOM
+    let costEl = $('#monthlySalaryCost');
+    costEl.empty();
+    costEl.append(`$${monthlyCost}`);
+    // change background color if overbudget
+    if(monthlyCost >= monthlyBudget){
+        costEl.attr('class', 'summary overBudget');
+    } else {
+        costEl.attr('class', 'summary');
+    }
+}
 
 $('document').ready(onReady);
