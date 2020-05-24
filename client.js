@@ -36,6 +36,18 @@ function addEmployee(){
         if(field.val() === undefined || field.val() === ""){
             alert('Invalid input. All fields must have a value entered.');
             return null;
+        } else if(field.attr('id') === 'idNumber') { //checking for duplicate IDs
+            for(let employee of employees){
+                if(employee['idNumber'] === field.val()){
+                    alert('Invalid input. ID Number must be unique.');
+                    return null;
+                }
+            }
+        } else if(field.attr('id') === 'annualSalary'){
+            if(isNaN(Number(field.val()))){
+                alert('Invalid input. Salary must be a number.')
+                return null;
+            }
         }
         //set the current field in the newEmployee object to the field value
         newEmployee[field.attr('id')] = field.val();
