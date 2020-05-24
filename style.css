@@ -2,8 +2,8 @@ body {
 
 }
 
-form {
-
+input {
+    display: inline;
 }
 
 table {

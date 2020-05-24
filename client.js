@@ -99,8 +99,8 @@ function buildForm(){
     // generate fields within the form
     form.append('<h2>Add an Employee</h2>');
     for(let field of employeeFields){
-        form.append(`<label for="${field.iName}">${field.exName}:</label>`)
-        form.append(`<input type="text" id="${field.iName}" name="${field.iName}"/><br>`)
+        //form.append(`<label for="${field.iName}">${field.exName}:</label>`)
+        form.append(`<input type="text" id="${field.iName}" name="${field.iName}" placeholder="${field.exName}"/><br>`)
     }// end for
     form.append(`<button type="button" id="buttonAddEmployee">Submit</button>`);
     
