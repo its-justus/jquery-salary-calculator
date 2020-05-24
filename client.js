@@ -141,8 +141,8 @@ function buildSummary(){
     body.append(sDiv);
 
     sDiv.append(`<h2>Summary</h2>`)
-    sDiv.append(`<h3 class="summary">Total Monthly Budget:</h3><h3 class="summary" id="monthlyBudget">$${monthlyBudget}</h3><br>`);
-    sDiv.append(`<h3 class="summary">Monthly Salary Cost:</h3><h3 class="summary" id="monthlySalaryCost">$0</h3>`)
+    sDiv.append(`<h4 class="summary">Total Monthly Budget:</h4><h4 class="summary" id="monthlyBudget">$${monthlyBudget}</h4><br>`);
+    sDiv.append(`<h4 class="summary">Monthly Salary Cost:</h4><h4 class="summary" id="monthlySalaryCost">$0</h4>`)
 }
 
 function updateMonthlyCost(){

@@ -1,15 +1,20 @@
 body {
-
+    min-width: 800px;
 }
+
+header {
+    text-align: center;
+}
+
 
 input {
     display: inline;
 }
 
 table {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
     align-content: center;
     padding: 10px;
     border-radius: 5px;
@@ -25,12 +30,23 @@ tr:nth-child(even) {
     background-color: #d0d0d0;
 }
 
+#divForm {
+    display: inline-block;
+    width: 15%;
+    float: left;
+}
+
 #divTable {
     text-align: center;
+    display: inline-block;
+    width: 65%;
 }
 
 #divSummary {
     text-align: right;
+    float: right;
+    display: inline;
+    width: 20%;
 }
 
 .summary {
